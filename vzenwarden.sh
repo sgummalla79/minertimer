@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 ###
-# Core MINERTIMER script. Kills minecraft Java edition on MacOS after 30 min.
+# Core VZENWARDEN script. Kills minecraft Java edition on MacOS after 30 min.
 # Developed and owned by Soferio Pty Limited.
 ###
 
@@ -12,8 +12,8 @@ DISPLAY_5_MIN_WARNING=true
 DISPLAY_1_MIN_WARNING=true
 
 # Directory and file to store total played time for the day
-LOG_DIRECTORY="/var/lib/minertimer"
-LOG_FILE="${LOG_DIRECTORY}/minertimer_playtime.log"
+LOG_DIRECTORY="/var/lib/.vzen_warden"
+LOG_FILE="${LOG_DIRECTORY}/.vzen_warden.log"
 
 # Create the directory (don't throw error if already exists)
 mkdir -p $LOG_DIRECTORY

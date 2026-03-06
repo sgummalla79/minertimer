@@ -1,4 +1,4 @@
-### MINERTIMER SYSTEM FOR LIMITING CHILDRENS' USE OF MINECRAFT (JAVA Edition) ON MAC COMPUTERS
+### VZENWARDEN SYSTEM FOR LIMITING CHILDRENS' USE OF MINECRAFT (JAVA Edition) ON MAC COMPUTERS
 
 Apple's screentime system is of no use in limiting childrens' use of Minecraft (Java edition) on Macintosh computers. You can read a discussion of this unresolved issue [[here]]( https://bugs.mojang.com/browse/MCL-14705?page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel&showAll=true).
 
@@ -28,7 +28,7 @@ This is an independent third-party project, no affiliation with, or endorsemnent
 
 ### INSTALLATION and UNINSTALLATION INSTRUCTIONS
 
-To install the system copy all files to a single directory and then go to terminal, go the directory where those files are located, and run "sudo zsh install_minertimer.sh". You may need to enter your password. To uninstall system, again go to that directory and run "sudo zsh uninstall_minertimer.sh".
+To install the system copy all files to a single directory and then go to terminal, go the directory where those files are located, and run "sudo zsh install_vzenwarden.sh". You may need to enter your password. To uninstall system, again go to that directory and run "sudo zsh uninstall_vzenwarden.sh".
 
 ### SUPPORT FURTHER DEVELOPMENT
 If our code helps you limit your child's Minecraft use to a reasonable amount, please donate here:

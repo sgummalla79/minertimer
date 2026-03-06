@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+To REMOVE: launchctl unload ~/Library/LaunchDaemons/com.vzen.warden_routine.plist
+To check if background process is running: launchctl list | grep com.vzen.warden_routine
+Or can check using: launchctl print system/com.vzen.warden_routine.plist
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.vzen.warden_routine</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/Shared/.vzen_warden/vzenwarden.sh</string>
+    </array>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>KeepAlive</key>
+    <false/>
+</dict>
+</plist>
