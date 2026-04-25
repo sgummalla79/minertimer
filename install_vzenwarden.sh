@@ -10,7 +10,9 @@
 
 mkdir -p /Users/Shared/.vzen_warden
 cp vzenwarden.sh /Users/Shared/.vzen_warden/
-chmod +x /Users/Shared/.vzen_warden/vzenwarden.sh
+chown -R root:wheel /Users/Shared/.vzen_warden
+chmod 755 /Users/Shared/.vzen_warden
+chmod 755 /Users/Shared/.vzen_warden/vzenwarden.sh
 
 # Step 2: Place the PLIST file where it belongs
 

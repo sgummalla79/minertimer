@@ -1,37 +1,45 @@
 #!/bin/zsh
 
 ###
-# Script to remove the vzenwarden files 
+# Script to remove the vzenwarden files
 # The script needs to be run from an Administrator account with Administrator privileges using SUDO
 # Copyright Soferio Pty Ltd
 ###
 
-# Step 1: Remove Vzenwarden script w
+set -u
 
-rm /Users/Shared/.vzen_warden/vzenwarden.sh
-rmdir /Users/Shared/.vzen_warden
+LABEL="com.vzen.warden_routine"
+PLIST="/Library/LaunchDaemons/${LABEL}.plist"
+INSTALL_DIR="/Users/Shared/.vzen_warden"
+LOG_DIR="/var/lib/.vzen_warden"
 
-# Step 2: Remove PLIST file 
+if [[ $EUID -ne 0 ]]; then
+    echo "ERROR: must be run as root. Try: sudo $0"
+    exit 1
+fi
 
-rm /Library/LaunchDaemons/com.vzen.warden_routine.plist
+# Step 1: Unregister the daemon first so it stops cleanly before its files disappear
+launchctl bootout "system/${LABEL}" 2>/dev/null || true
 
-# Step 3: Unregister the vzenwarden as a background task
+# Step 2: Remove the plist
+rm -f "$PLIST"
 
-launchctl bootout system/com.vzen.warden_routine
+# Step 3: Remove the installed script and its directory
+rm -f "${INSTALL_DIR}/vzenwarden.sh"
+rmdir "$INSTALL_DIR" 2>/dev/null || true
 
-# Step 4: Remove log file
-rm /var/lib/.vzen_warden/.vzen_warden.log
-rmdir /var/lib/.vzen_warden
+# Step 4: Remove log file and its directory
+rm -f "${LOG_DIR}/.vzen_warden.log"
+rmdir "$LOG_DIR" 2>/dev/null || true
 
-# Step 5: Report
+# Step 5: Verify
 echo ""
-echo "Script has been run. Assuming there are no errors, to check if the vzenwarden background process is running type the following:"
-echo "sudo launchctl list | grep com.vzen.warden_routine"
-echo "If you get nothing, it means the background process is no longer running and minecraft is not limited."
-
-
-
-
-# TO CHECK IF SCRIPT IS RUNNING:
-# sudo launchctl list | grep soferio
-
+if launchctl list | grep -q "$LABEL"; then
+    echo "WARNING: ${LABEL} still appears in launchctl list — uninstall did not fully complete."
+    exit 1
+fi
+if [[ -e "$PLIST" || -e "${INSTALL_DIR}/vzenwarden.sh" ]]; then
+    echo "WARNING: leftover files remain. Check $PLIST and $INSTALL_DIR."
+    exit 1
+fi
+echo "Uninstall complete. vzenwarden is no longer running and Minecraft is not limited."
